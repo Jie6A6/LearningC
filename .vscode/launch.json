@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) 启动调试",
+            "type": "cppdbg",
+            "request": "launch",
+            // 对应 tasks.json 中生成的 exe 文件位置
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            // 如果需要弹出独立的 cmd 窗口输入数据，请改为 true
+            "externalConsole": false,
+            "MIMode": "gdb",
+            // 调试器路径：指向你的 gdb.exe
+            "miDebuggerPath": "C:\\mingW\\mingw64\\bin\\gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            // 必须与 tasks.json 中的 label 完全一致
+            "preLaunchTask": "C/C++: g++.exe 生成活动文件"
+        }
+    ]
+}
