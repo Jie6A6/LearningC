@@ -1559,8 +1559,8 @@ int main(){
     cout << "数组中元素个数：" << sizeof(arr) / sizeof(arr[0]) << endl;
 
     // 查看首位地址
-    cout << "数组的首位地址：" << (int)arr << endl;
-    cout << "数组第一个元素的首位地址：" << (int)&arr[0] << endl;
+    cout << "数组的首位地址：" << arr << endl;
+    cout << "数组第一个元素的首位地址：" << &arr[0] << endl;
 
     // 数组名是常量，不可以进行赋值操作
     // arr = 100;
@@ -1807,12 +1807,23 @@ int main(){
         {7, 5, 6}
     };
     
+    // 内存占用
     cout << "数组所占的内存空间：" << sizeof(arr) << endl;
+    cout << "数组一行元素所占的内存空间：" << sizeof(arr[0]) << endl;
     cout << "数组元素所占的内存空间：" << sizeof(arr[0][0]) << endl;
-    cout << "数组的首地址：" << sizeof(arr[0][0]) << endl;
+    cout << "数组行数所占的内存空间：" << sizeof(arr) / sizeof(arr[0]) << endl;
+    
+    // 首地址
+    cout << "数组的首地址：" << arr << endl;
+    cout << "数组第一行的首地址：" << arr[0] << endl;
+    cout << "数组第一元素的首地址：" << &arr[0][0] << endl;
     
     system("pause");
 
     return 0;
 }
 ```
+
+### 5.3.3 二维数组应用案例
+
+**考试成绩统计**：
