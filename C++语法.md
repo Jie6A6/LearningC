@@ -1837,6 +1837,7 @@ int main(){
 ```
 #include <iostream>
 using namespace std;
+#include <string>
 
 int main(){
 
@@ -1848,6 +1849,8 @@ int main(){
         {60, 70, 80}
     };
     
+    string name[3] = {"张三", "李四", "王五"};
+
     // 统计每个人总分
     for (int i = 0; i < 3; i++)
     {
@@ -1856,7 +1859,7 @@ int main(){
         {
             sum += score[i][j];
         }
-        cout << "第" << i + 1 << "个人的总分为：" << sum << endl;
+        cout << name[i] << "的总分为：" << sum << endl;
     }
        
     system("pause");
