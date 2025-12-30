@@ -690,7 +690,7 @@ C/C++ 支持最基本的三种程序运行结构：**顺序结构、选择结构
 
 ### 4.1.1 if 语句
 
-1. 单行格式 if 语句
+1. 单行格式 if 语句：`if (条件){条件满足执行的语句}`
 
 ```
 #include <iostream>
@@ -698,16 +698,21 @@ using namespace std;
 
 int main() {
 
-    int a = 2;
-    int b = 0;
+    // 1. 用户输入分数
+    int score = 0;
+    cout << "请输入一个分数：" << endl;
+    cin >> score;
 
-    cout << a << endl;
-    cout << b << endl;
-    cout << !a << endl;
-    cout << (a && b) << endl;
-    cout << (a || b) << endl;
-    
-  
+    // 2. 打印用户输入的分数
+    cout << "您输入的分数是：" << score << endl;
+
+    // 3. 判断分数是否大于600，如果大于，那么输出
+    // 注意 if 后面不能加分号
+    if (score > 600)
+    {
+        cout << "恭喜您考上了一本大学" << endl;
+    }
+
     system("pause");
     
     return 0;
@@ -715,8 +720,926 @@ int main() {
 }
 ```
 
-2. 多行格式 if 语句
+2. 多行格式 if 语句：`if (条件){条件满足执行的语句}else{条件不满足执行的语句}`
+
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+
+    // 1. 用户输入分数
+    int score = 0;
+    cout << "请输入一个分数：" << endl;
+    cin >> score;
+
+    // 2. 打印用户输入的分数
+    cout << "您输入的分数是：" << score << endl;
+
+    // 3. 判断
+    if (score > 600)
+    {
+        cout << "恭喜您考上了一本大学" << endl;
+    }
+    else
+    {
+        cout << "可惜您没有考上一本大学" << endl;
+    }
+
+    system("pause");
+    
+    return 0;
+    
+}
+```
 
 
+3. 多条件的 if 语句：`if (条件1){条件1满足执行的语句}else if (条件2){条件2满足执行的语句}...else{都不满足执行的语句}`
 
-3. 多条件的 if 语句
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+
+    // 1. 用户输入分数
+    int score = 0;
+    cout << "请输入一个分数：" << endl;
+    cin >> score;
+
+    // 2. 打印用户输入的分数
+    cout << "您输入的分数是：" << score << endl;
+
+    // 3. 判断
+    if (score > 600)
+    {
+        cout << "恭喜您考上了一本大学" << endl;
+    }
+    else if (score > 500)
+    {
+        cout << "恭喜您考上了二本大学" << endl;
+    }
+    else if (score > 400)
+    {
+        cout << "恭喜您考上了三本大学" << endl;
+    }
+    else
+    {
+        cout << "可惜您没考上大学" << endl;
+    }
+
+    system("pause");
+    
+    return 0;
+    
+}
+```
+
+4. 嵌套 if 语句：在 if 语句中，可以嵌套使用 if 语句，达到更精确的条件判断。
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    // 1. 用户输入分数
+    int score = 0;
+    cout << "请输入一个分数：" << endl;
+    cin >> score;
+
+    // 2. 打印用户输入的分数
+    cout << "您输入的分数是：" << score << endl;
+
+    // 3. 判断
+    /*
+    如果大于600 一本
+        如果大于700 北大
+        如果大于650 清华
+        其余        人大
+    如果大于500 二本
+    如果大于400 三本
+    其余情况，未考上本科
+    */
+
+    if (score > 600)
+    {
+        cout << "恭喜您考上了一本大学" << endl;
+        if (score > 700)
+        {
+            cout << "恭喜您考上了北京大学" << endl;
+        }
+        else if (score > 650)
+        {
+            cout << "恭喜您考上了清华大学" << endl;
+        }
+        else
+        {
+            cout << "恭喜您考上了人民大学" << endl;
+        }
+    }
+    else if (score > 500)
+    {
+        cout << "恭喜您考上了二本大学" << endl;
+    }
+    else if (score > 400)
+    {
+        cout << "恭喜您考上了三本大学" << endl;
+    }
+    else
+    {
+        cout << "可惜您没考上大学" << endl;
+    }
+
+    system("pause");
+
+    return 0;
+}
+```
+
+**练习案例**：三只小猪称体重
+
+有三只小猪 A、B、C ，请分别输入三只小猪的体重，并且判断哪只小猪最重？
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    int A = 0;
+    int B = 0;
+    int C = 0;
+
+    cout << "请输入 A 小猪的体重：" << endl;
+    cin >> A;
+    cout << "A 小猪的体重：" << A << endl;
+
+    cout << "请输入 B 小猪的体重：" << endl;
+    cin >> B;
+    cout << "B 小猪的体重：" << B << endl;
+    
+    cout << "请输入 C 小猪的体重：" << endl;
+    cin >> C;
+    cout << "C 小猪的体重：" << C << endl;
+
+    if (A > B)
+    {
+        if (A > C)
+        {
+            cout << "A 小猪最重" << endl;
+        }
+        else
+        {
+            cout << "C 小猪最重" << endl;
+        }
+    }
+    else
+    {
+        if (B > C)
+        {
+            cout << "B 小猪最重" << endl;
+        }
+        else
+        {
+            cout << "C 小猪最重" << endl;
+        }
+    }
+
+    system("pause");
+
+    return 0;
+}
+```
+
+### 4.1.2 三目运算符
+
+1. **作用**：通过三目运算符号实现简单判断
+
+2. **语法**：`表达式1 ? 表达式2 : 表达式3`
+   
+3. **解释**：
+   如果表达式 1 的值为真，执行表达式 2，并返回表达式 2 的结果；
+   如果表达式 1 的值为假，执行表达式 3，并返回表达式 3 的结果。
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    int a = 10;
+    int b = 20;
+    int c = 0;
+
+    c = a > b ? a : b;
+    cout << "c = " << c << endl;
+
+    // C++ 中三目运算符返回的是变量，可以继续赋值
+
+    (a > b ? a : b) = 100;
+
+    cout << "a = " << a << endl;
+    cout << "b = " << b << endl;
+
+    system("pause");
+
+    return 0;
+
+}
+```
+
+### 4.1.3 switch 语句
+
+1. **作用**：执行多条件分支语句
+
+2. **语法**：
+
+```
+switch (表达式)
+
+{
+
+case 结果1 : 
+    执行语句;
+    break;
+
+case 结果2 : 
+    执行语句;
+    break;
+
+    ...
+
+default:
+    执行语句;
+    break;
+
+}
+```
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    /*
+    给电影进行打分
+    10 ~ 9 经典
+    8 ~ 7 非常好
+    6 ~ 5 一般
+    5 以下 烂片
+    */
+    
+    cout << "请给电影进行打分" << endl;
+
+    int score = 0;
+    cin >> score;
+    cout << "您打的分数为：" << score << endl;
+
+    switch (score)
+
+    {
+    case 10:
+        cout << "您认为是经典电影" << endl;
+        break;
+    case 9:
+        cout << "您认为是经典电影" << endl;
+        break;
+    case 8:
+        cout << "您认为是非常好的电影" << endl;
+        break;
+    case 7:
+        cout << "您认为是非常好的电影" << endl;
+        break;
+    case 6:
+        cout << "您认为是一般的电影" << endl;
+        break;
+    case 5:
+        cout << "您认为是一般的电影" << endl;
+        break;
+    default : 
+        cout << "您认为是烂片" << endl;
+        break;
+
+    }
+
+
+    system("pause");
+
+    return 0;
+
+}
+```
+
+3. if 和 switch 区别 ？
+
+- switch 缺点是判断只能是整型或字符型，不可以是一个区间；
+- switch 优点是结构清晰，执行效率高；
+
+## 4.2 循环结构
+
+### 4.2.1 while 循环语句
+
+1. **作用**：满足循环条件，执行循环语句
+
+2. **语法**：`while (循环条件){循环语句}`
+
+3. **解释**：只要循环条件的结果为真，就执行循环语句
+
+示例：
+
+```
+#include<iostream>
+using namespace std;
+
+int main(){
+
+    // 打印 0 ~ 9
+    int num = 0;
+    
+
+    while (num < 10)
+    {
+        cout << num << endl;
+        num++;
+    }
+
+    system("pause");
+
+    return 0;
+}
+```
+
+**猜数字**：系统随机生成一个 (1~10) 的数字，玩家进行猜测，如果猜错，提示玩家数学过大或者过小，如果猜对恭喜玩家胜利，并退出游戏。
+
+```
+#include <iostream>
+using namespace std;
+// time 系统时间头文件包含
+#include <ctime>
+    
+int main(){
+    
+    srand((unsigned int)time(NULL)); // 通过将当前时间作为种子
+
+    // 1. 系统生成随机数 (随机生成0 + 1 ~ 99 + 1 随机数)
+    int num = rand()%10 + 1;
+    cout << num << endl;
+
+    // 2. 玩家进行猜测
+    int val = 0;
+
+
+    while (1)
+    {
+        cout << "请输入猜测的数字（1~10）：" << endl;
+        cin >> val;
+
+        // 3. 判断玩家的猜测
+        if (val > num)
+        {
+            cout << "过大" << endl;
+        }
+        else if (val < num)
+        {
+            cout << "过小" << endl; 
+        }
+        else
+        {
+            cout << "猜对啦" << endl;
+            break; // break 退出当前循环
+        }
+    }
+    
+
+    system("pause");
+
+    return 0;
+
+    
+}
+```
+
+### 4.2.2 do...while 循环语句
+
+1. **作用**：满足循环条件，执行循环语句
+
+2. **语法**：`do{循环语句} while(循环条件);`
+
+3. **注意**：与while的区别在于do...while会先执行一次循环语句，再判断循环条件
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    int num = 0;
+
+    do
+    {
+        cout << num << endl;
+        num++;
+    }
+    while(num < 10);
+
+    system("pause");
+
+    return 0;
+
+}
+```
+
+**水仙花数**：水仙花数是指一个 3 位数，它的每位上的数字的3次幂之和等于它本身
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    // 1. 所有三位数输出
+
+    int num = 100;
+
+    do{
+        int a = 0;
+        int b = 0;
+        int c = 0;
+        
+        a = num % 10;       // 获取个位
+        b = num / 10 % 10;  // 获取十位
+        c = num /100 % 100; // 获取百位
+        
+        if (a*a*a + b*b*b + c*c*c == num)
+        {
+            cout << num << endl;
+        }
+        
+        
+        num++;
+    } while (num < 1000);
+
+    system("pause");
+
+    return 0;
+
+}
+```
+
+### 4.2.3 for 循环语句
+
+1. **作用**：满足循环条件，执行循环语句
+
+2. **语法**：``for(起始表达式;条件表达式;末尾循环体) { 循环语句 }`
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    for (int i = 0; i < 10; i++)
+    {
+        cout << i << endl;
+    }
+
+    system("pause");
+
+    return 0;
+}
+```
+同理：
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    int i = 0;
+    for (; ; )
+    {
+       if (i >= 10)
+       {
+        break;
+       }
+    }
+    cout << i << endl;
+    i++;
+
+    system("pause");
+
+    return 0;
+}
+```
+
+**练敲桌子**：从 1 开始数到数字 100，如果数字个位含有 7，或者该数字是 7 的倍数，打印敲桌子，其余的数字直接打印输出。
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    for (int i = 1; i < 101; i++)
+    {
+        if (i % 10  == 7 || i / 10 == 7 || i % 7 == 0)
+        {
+            cout << "敲桌子" << endl;
+        }
+        else
+        {
+            cout << i << endl;
+        }
+    }
+
+    system("pause");
+
+    return 0;
+}
+```
+
+### 4.2.4 嵌套循环
+
+**作用**：在循环体中再嵌套一层循环，解决一些实际问题
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    for (int i = 0; i < 10; i++)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            cout << "* " ;
+        }
+        cout << endl;
+    }
+
+    system("pause");
+
+    return 0;
+}
+
+```
+
+**乘法口诀表**
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    for (int i = 1; i < 10; i++)
+    {
+        for (int j = 1; j <= i; j++)
+        {
+            cout << j << " × " << i << " = " << i*j << " ";
+        }
+        cout << endl;
+    }
+
+    system("pause");
+
+    return 0;
+}
+```
+
+## 4.3 跳转语句
+
+### 4.3.1 break 语句
+
+1. **作用**：用于跳出**选择结构**或者**循环结构**
+
+2. **使用时机**：
+
+    - 出现在 switch 条件语句中，作用是终止 case 并跳出 switch
+    - 出现在循环语句中，作用是跳出当前的循环语句
+    - 出现在嵌套循环中，跳出最近的内层循环语句
+
+示例 1 ：
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+
+    // 1. switch 语句
+    cout << "请选择副本难度" << endl;
+    cout << "1. 普通" << endl;
+    cout << "2. 中等" << endl;
+    cout << "3. 困难" << endl;
+
+    int select = 0;
+
+    cin >> select;
+
+    switch (select)
+    {
+    case 1:
+        cout << "您选择的是普通难度" << endl;
+        break;
+    case 2:
+        cout << "您选择的是中等难度" << endl;
+        break;
+    case 3:
+        cout << "您选择的是困难难度" << endl;
+        break;
+    default:
+        break;
+    }
+    
+    // 2. 出现在循环语句中
+    for (int i = 0; i < 10; i++)
+    {
+        // 如果 i 等于 5，退出循环
+        if (i == 5)
+        {
+            break;
+        }
+        cout << i << endl;
+    }
+
+    // 3. 出现在嵌套循环语句中
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            if (j == 5)
+            {
+                break;
+            }
+            cout << "*";
+        }
+        cout << endl;
+    }
+
+    system("pause");
+
+    return 0;
+}
+```
+
+### 4.3.2 continue 语句
+
+**作用**：在循环语句中，跳过本次循环中余下尚未执行的语句，继续执行下一次循环
+
+示例：
+
+```
+#include <iostream>
+using name std;
+
+int main(){
+
+    for (int i = 0; i < 10; i++)
+    {
+        // 如果是奇数输出，偶数不输出
+        if (i % 2 == 0)
+        {
+            continue;
+        }
+        else
+        {
+            cout << i << endl;
+        }
+    }
+
+    system("pause");
+
+    return 0;
+}
+```
+
+### 4.3.3 goto 语句
+
+1. **作用**：可以无条件跳转语句
+
+2. **语法**：`goto 标记`
+
+3. **解释**：如果标记的名称存在，执行到 goto 语句时，会跳转到标记的位置
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    cout << "1. ××××××××" << endl;
+
+    cout << "2. ××××××××" << endl;
+
+    goto FLAG;
+
+    cout << "3. ××××××××" << endl;
+
+    cout << "4. ××××××××" << endl;
+
+    FLAG:
+    cout << "5. ××××××××" << endl;
+
+    system("pause");
+
+    return 0;
+}
+```
+
+# 5 数组
+
+## 5.1 概述
+
+数组是一个集合，存放相同类型的数据元素。
+
+- **特点 1**：数组中的每个数据元素都是相同的数据类型
+- **特点 2**：数组是由连续的内存位置组成的
+
+## 5.2 一维数组
+
+### 5.2.1 一维数组定义方式
+
+一维数组定义的三种方式：
+
+1. `数据类型 数组名[ 数组长度 ];`
+2. `数据类型 数组名[ 数组长度 ] = {值1, 值2, ...};`
+3. `数据类型 数组名[  ] = {值1, 值2, ...};`
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    // 定义方式1
+    // 数据类型 数组名[ 数组长度 ];
+    int arr[5];
+    // 给数组中的元素进行赋值 (下标是从 0 开始)
+    arr[0] = 10;
+    arr[1] = 20;
+    arr[2] = 30;
+    arr[3] = 40;
+    arr[4] = 50;
+    // 访问数据元素
+    cout << arr[0] << endl;
+    cout << arr[1] << endl;
+    cout << arr[2] << endl;
+    cout << arr[3] << endl;
+    cout << arr[4] << endl;
+
+    // 定义方式2
+    // 数据类型 数组名[ 数组长度 ] = {值1, 值2, ...};
+    // 如果在初始化数据时，没有全部填完，会用 0 填补剩余数据
+    int arr2[5] = {15, 25, 35, 45, 55};
+    
+    // 访问数据元素
+    cout << arr2[0] << endl;
+    cout << arr2[1] << endl;
+    cout << arr2[2] << endl;
+    cout << arr2[3] << endl;
+    cout << arr2[4] << endl;
+
+    // 定义方式3
+    // 数据类型 数组名[  ] = {值1, 值2, ...};
+    int arr3[ ] = {16, 26, 36, 46, 56, 42, 32, 45,223};
+    
+    // 访问数据元素
+    for (int i = 0; i < 9; i++)
+    {
+        cout << arr3[i] << endl;
+    }
+    
+    system("pause");
+
+    return 0;
+}
+```
+
+### 5.2.2 一维数组数组名
+
+一维数组名称的**用途**：
+
+1. 可以统计整个数组在内存中的长度
+2. 可以获取数组在内存中的首地址
+3. 注意：数组名为常量，不可以进行赋值操作
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    int arr[5] = {1, 2, 3, 4, 5};
+    
+    // 统计内存大小
+    cout << "整个数组占用内存空间：" << sizeof(arr) << endl;
+    cout << "数组单个元素占用内存空间：" << sizeof(arr[0]) << endl;
+    cout << "数组中元素个数：" << sizeof(arr) / sizeof(arr[0]) << endl;
+
+    // 查看首位地址
+    cout << "数组的首位地址：" << (int)arr << endl;
+    cout << "数组第一个元素的首位地址：" << (int)&arr[0] << endl;
+
+    // 数组名是常量，不可以进行赋值操作
+    // arr = 100;
+    
+    system("pause");
+
+    return 0;
+}
+```
+
+**五只小猪称体重**：记录五只小猪的体重，如：`int arr[5] = {300, 350, 200, 400, 250};`，找出并打印最重的小猪体重。
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+    
+    int i = 0;
+    int max = 300;
+    int arr[5] = {300, 350, 200, 400, 250};
+
+    for (i = 0; i < 5; i++)
+    {
+        if (arr[i] > max)
+        {
+            max = arr[i];
+        }
+        else
+        {
+            continue;
+        }
+    }
+
+    cout << "最重的小猪体重为" << max << endl;
+    
+    system("pause");
+
+    return 0;
+}
+```
+
+**数组元素逆置**：声明一个 5 个元素的数组，并且将元素逆置。
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+    
+    int i = 0;
+    int start = 0;
+    int arr[5] = {1, 2, 3, 4, 5};
+    int end = sizeof(arr) / sizeof(arr[0]) - 1;
+    
+    cout << "逆置前" << endl;
+    for (i = 0; i < 5; i++)
+    {
+       cout << arr[i] << endl; 
+    }
+
+    while (start < end)
+    {
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        start++;
+        end--;
+    }
+
+    cout << "逆置后" << endl;
+    for (i = 0; i < 5; i++)
+    {
+       cout << arr[i] << endl; 
+    }
+    
+    
+    system("pause");
+
+    return 0;
+}
+```
