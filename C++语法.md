@@ -2737,6 +2737,8 @@ int main(){
 
 **作用**：用 const 来防止误操作
 
+将函数中的形参改为指针，可以减少内存空间，而且不会复制新的副本出来
+
 示例：
 
 ```
@@ -2754,6 +2756,7 @@ struct Student
 };
 
 // const 使用场景
+// 将函数中的形参改为指针，可以减少内存空间
 void printStudent(const Student * stu) // 加 const 防止函数体中的误操作
 {
     // stu->score = 50; // 操作失败，因为加了 const 操作
@@ -2771,6 +2774,97 @@ int main(){
     stu.score = 100;
 
     printStudent(&stu);
+
+    system("pause");
+
+    return 0;
+
+}
+```
+
+## 8.8 结构体案例
+
+### 8.8.1 案例 1
+
+学校正在做毕业设计，每名老师带领 5 个学生，总共有 3 名老师，需求如下
+
+设计学生和老师的结构体，其中在老师的结构体中，有老师姓名和一个存放 5 名学生的数组作为成员，学生的成员有姓名、考试分数，创建数组存放 3 名老师，通过函数给每个老师及所带学生赋值，最终打印出老师数据以及老师所带的学生数据。
+
+```
+#include <iostream>
+using namespace std;
+#include <string>
+#include <cstdlib>
+#include <ctime>
+
+// 学生结构体定义
+
+struct Student
+{
+    string sName;
+    int score;
+};
+
+// 老师结构体定义
+
+struct Teacher
+{
+    string tName;
+    struct Student sArray[5];
+};
+
+// 赋值函数
+void allocateSpace(struct Teacher tArray[], int len)
+{
+
+    string nameSeed = "ABCDE";
+    // 给老师赋值
+    for (int i = 0; i < len; i++)
+    {
+        tArray[i].tName = "Teacher_";
+        tArray[i].tName += nameSeed[i];
+
+        // 通过循环给每一名老师所带学生赋值
+        for (int j = 0; j < 5; j++)
+        {
+            tArray[i].sArray[j].sName = "Student_";
+            tArray[i].sArray[j].sName += nameSeed[j];
+
+            int random = rand() % 61 +40; // 41 ~ 100
+            tArray[i].sArray[j].score = random;
+        }
+
+    }
+}
+
+void printInfo(struct Teacher tArray[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        cout << "老师姓名：" << tArray[i].tName << endl;
+
+        for (int j = 0; j < 5; j++)
+        {
+            cout << "\t学生姓名：" << tArray[i].sArray[j].sName
+                 << " 学生成绩：" << tArray[i].sArray[j].score << endl;
+        }
+    }
+}
+
+int main(){
+
+    // 随机种子
+    srand((unsigned int)time(NULL));
+
+    // 创建 3 名老师的数组
+    struct Teacher tArray[3];
+
+    // 给老师和学生信息赋值
+    int len = sizeof(tArray) / sizeof(tArray[0]);
+    allocateSpace(tArray, len);
+
+    // 打印信息
+    printInfo(tArray, len);
 
     system("pause");
 
