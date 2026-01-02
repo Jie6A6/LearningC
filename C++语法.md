@@ -2872,3 +2872,88 @@ int main(){
 
 }
 ```
+
+### 8.8.2 案例 2
+
+设计一个英雄的结构体，包括组员姓名、年龄、性别，创建结构体数组，数组中存放 5 名英雄。通过冒泡排序的算法，将数组中的英雄按照年龄进行升序排序，最终法院排序后的结构。
+
+五名英雄的信息如下：
+
+```
+{"刘备", 23, "男"},
+{"关羽", 22, "男"},
+{"张飞", 23, "男"},
+{"赵云", 21, "男"},
+{"貂蝉", 19, "女"},
+```
+
+```
+#include <iostream>
+using namespace std;
+#include <string>
+
+
+// 英雄结构体定义
+
+struct hero
+{
+    string name;
+    int age;
+    string gender;
+};
+
+
+// 赋值函数
+void bubble(struct hero arr[], int len)
+{
+
+    
+    // 给老师赋值
+    for (int i = 0; i < len; i++)
+    {
+        for (int j = 0; j < len -1; j++)
+        {
+            if (arr[j].age > arr[j + 1].age)
+            {
+                struct hero temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+
+    }
+}
+
+void printInfo(struct hero arr[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        cout << arr[i].name 
+             << arr[i].age << endl;
+    }
+}
+
+int main(){
+
+    // 创建英雄数组
+    struct hero arr[5] = 
+    {
+        {"刘备", 23, "男"},
+        {"关羽", 22, "男"},
+        {"张飞", 23, "男"},
+        {"赵云", 21, "男"},
+        {"貂蝉", 19, "女"}
+    };
+
+    int len = sizeof(arr) / sizeof(arr[0]);
+
+    bubble(arr, len);
+
+    printInfo(arr, len);
+
+    system("pause");
+
+    return 0;
+
+}
+```
