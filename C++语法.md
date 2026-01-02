@@ -2528,5 +2528,253 @@ int main(){
 示例：
 
 ```
+#include <iostream>
+using namespace std;
+#include <string>
 
+// 创建学生数据类型，学生包括 (姓名、年龄、分数)
+// 自定义数据类型，一些类型集合组成一个类型
+
+struct Student
+{
+    string name;
+    int age;
+    int score;
+};
+
+int main(){
+
+    // 结构体数组
+    struct Student stuArray[3] = 
+    {
+        {"张三", 18, 100},
+        {"李四", 19, 80},
+        {"王五", 20, 60},
+    };
+
+    // 给结构体数组中的元素赋值
+    stuArray[2].name = "赵六";
+    stuArray[2].age = 19;
+    stuArray[2].score = 90;
+
+    // 遍历结构体数组
+    for (int i = 0; i < 3; i++)
+    {
+        cout << "姓名为" << stuArray[i].name 
+             << " 年龄为" << stuArray[i].age 
+             << " 分数为" << stuArray[i].score << endl;
+    }
+
+    system("pause");
+
+    return 0;
+
+}
+```
+
+## 8.4 结构体指针
+
+**作用**：通过指针访问结构体中的成员
+
+- 利用操作符 `->` 可以通过结构体指针访问结构体属性
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+#include <string>
+
+// 创建学生数据类型，学生包括 (姓名、年龄、分数)
+// 自定义数据类型，一些类型集合组成一个类型
+
+struct Student
+{
+    string name;
+    int age;
+    int score;
+};
+
+int main(){
+
+    struct Student stu = {"张三", 18, 100};
+
+    // 通过指针指向结构体变量
+    struct Student * p = &stu;
+
+    // 通过指针访问结构体变量中的数据
+    cout << "姓名：" << p->name 
+         << " 年龄：" << p->age 
+         << " 分数：" << p->score << endl;
+
+    system("pause");
+
+    return 0;
+
+}
+```
+
+## 8.5 结构体嵌套结构体
+
+1. **作用**：结构体中的成员可以是另一个结构体
+
+2. **例如**：每个老师辅导一个学员，一个老师的结构体中，记录一个学生的结构体
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+#include <string>
+
+// 学生结构体定义
+
+struct Student
+{
+    string name;
+    int age;
+    int score;
+};
+
+// 教师结构体定义
+
+struct Teacher
+{
+    // 成员列表
+    int id; // 职工编号
+    string name; // 教师姓名
+    int age; // 教师年龄
+    struct Student stu; // 子结构体，辅导的学生
+};
+
+int main(){
+
+    Teacher t;
+    t.id = 001;
+    t.name = "张八";
+    t.age = 30;
+    t.stu.name = "张三";
+    t.stu.age = 18;
+    t.stu.score = 100;
+
+    cout << "老师姓名：" << t.name
+         << " 老师编号：" << t.id
+         << " 老师年龄：" << t.age 
+         << " 老师辅导的学生姓名：" << t.stu.name 
+         << " 老师辅导的学生年龄：" << t.stu.age
+         << " 老师辅导的学生分数：" << t.stu.score
+         << endl;
+
+    system("pause");
+
+    return 0;
+
+}
+```
+
+## 8.6 结构体做函数参数
+
+**作用**：将结构体作为参数向函数中传递
+
+传递方式有两种：
+
+- 值传递
+- 地址传递
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+#include <string>
+
+// 学生结构体定义
+
+struct Student
+{
+    string name;
+    int age;
+    int score;
+};
+
+// 1. 值传递
+void printStudent1(struct Student stu)
+{
+    stu.score = 70;
+    cout << "子函数中 姓名：" << stu.name
+         << " 年龄：" << stu.age
+         << " 分数：" << stu.score << endl;
+}
+
+// 2. 地址传递
+void printStudent2(struct Student * stu)
+{
+    stu->score = 50;
+    cout << "子函数中 姓名：" << stu->name
+         << " 年龄：" << stu->age
+         << " 分数：" << stu->score << endl;
+}
+
+
+int main(){
+
+    Student stu;
+    stu.name = "张三";
+    stu.age = 18;
+    stu.score = 100;
+
+    printStudent1(stu);
+    printStudent2(&stu);
+
+    system("pause");
+
+    return 0;
+
+}
+```
+
+## 8.7 结构体中 const 使用场景
+
+**作用**：用 const 来防止误操作
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+#include <string>
+
+// 学生结构体定义
+
+struct Student
+{
+    string name;
+    int age;
+    int score;
+};
+
+// const 使用场景
+void printStudent(const Student * stu) // 加 const 防止函数体中的误操作
+{
+    // stu->score = 50; // 操作失败，因为加了 const 操作
+    cout << "子函数中 姓名：" << stu->name
+         << " 年龄：" << stu->age
+         << " 分数：" << stu->score << endl;
+}
+
+
+int main(){
+
+    Student stu;
+    stu.name = "张三";
+    stu.age = 18;
+    stu.score = 100;
+
+    printStudent(&stu);
+
+    system("pause");
+
+    return 0;
+
+}
 ```

@@ -2,30 +2,36 @@
 using namespace std;
 #include <string>
 
+// 学生结构体定义
+
+struct Student
+{
+    string name;
+    int age;
+    int score;
+};
+
+// const 使用场景
+void printStudent(const Student * stu) // 加 const 防止函数体中的误操作
+{
+    // stu->score = 50; // 操作失败，因为加了 const 操作
+    cout << "子函数中 姓名：" << stu->name
+         << " 年龄：" << stu->age
+         << " 分数：" << stu->score << endl;
+}
+
+
 int main(){
 
-    
-    int score[3][3] = 
-    {
-        {100, 100, 100},
-        {90, 50, 100},
-        {60, 70, 80}
-    };
-    
-    string name[3] = {"张三", "李四", "王五"};
+    Student stu;
+    stu.name = "张三";
+    stu.age = 18;
+    stu.score = 100;
 
-    // 统计每个人总分
-    for (int i = 0; i < 3; i++)
-    {
-        int sum = 0;
-        for (int j = 0; j < 3; j++)
-        {
-            sum += score[i][j];
-        }
-        cout << name[i] << "的总分为：" << sum << endl;
-    }
-       
+    printStudent(&stu);
+
     system("pause");
 
     return 0;
+
 }
