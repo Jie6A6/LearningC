@@ -1867,3 +1867,666 @@ int main(){
     return 0;
 }
 ```
+
+# 6 函数
+
+## 6.1 概述
+
+**作用**：将一段经常使用的代码封装起来，减少重复代码
+
+一个较大的程序，一般分为若干个程序块，每个模块实现特定的功能。
+
+## 6.2 函数的定义
+
+函数的定义一般主要有 5 个步骤：
+
+1. 返回值类型
+2. 函数名
+3. 参数列表
+4. 函数体语句
+5. return 表达式
+
+**语法**：
+
+```
+返回值类型 函数名 (参数列表)
+{
+
+    函数体语句
+
+    return 表达式
+
+}
+```
+
+示例：实现一个加法函数，功能是，传入两个整型数据，计算数据相加的结果，并返回。
+
+```
+#include <iostream>
+using namespace std;
+
+// 函数的定义
+int add(int num1, int num2)
+{
+    int num = num1 + num2;
+    return num;
+}
+
+int main(){
+    system("pause");
+    return 0;
+}
+```
+
+## 6.3 函数的调用
+
+1. **作用**：调用定义的函数
+
+2. **语法**：`函数名 (参数)`
+
+3. 函数定义时的参数是形参，调用函数时的参数是实参
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+// 函数的定义，num1 和 num2 是形参
+int add(int num1, int num2)
+{
+    int num = num1 + num2;
+    return num;
+}
+
+int main(){
+
+    // main 函数中调用 add 函数，a 和 b 是实参
+    int a = 10;
+    int b = 20;
+
+    // 调用函数
+
+    int c = add(a, b);
+
+    cout << "c = " << c << endl;
+
+    system("pause");
+    return 0;
+}
+```
+
+## 6.4 值传递
+
+1. 函数调用时实参将数值传入给形参
+
+2. 值传递过程中，**如果形参发生改变，不会影响实参**
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+// 函数的定义，实现两个数字进行交换
+// 如果函数不需要返回值，声明可以用 void
+
+void swap(int num1, int num2)
+{
+    cout << "交换前：" << endl;
+    cout << "num1 = " << num1 << endl;
+    cout << "num2 = " << num2 << endl;
+    int temp = num1;
+    num1 = num2;
+    num2 = temp;
+
+    cout << "交换后：" << endl;
+    cout << "num1 = " << num1 << endl;
+    cout << "num2 = " << num2 << endl;
+    
+    // return; // 返回值不需要的时候，可以不写
+}
+
+int main(){
+
+    // main 函数中调用 add 函数，a 和 b 是实参
+    int a = 10;
+    int b = 20;
+
+    // 调用函数
+    // 当值传递时，形参发生改变，并不影响实参
+    swap(a, b);
+
+    cout << "a = " << a << endl;
+    cout << "b = " << b << endl;
+
+    system("pause");
+    return 0;
+}
+```
+
+## 6.5 函数的常见样式
+
+常见的函数样式有 4 种：
+
+1. 无参无返
+2. 有参无返
+3. 无参有返
+4. 有参有返
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+// 1. 无参无返
+void test01()
+{
+    cout << "this is test01" << endl;
+}
+
+// 2. 有参无返
+void test02(int a)
+{
+    cout << "this is test02 a = " << a << endl;
+}
+
+// 3. 无参有返
+int test03()
+{
+    cout << "this is test03" << endl;
+    return 1000;
+}
+
+// 4. 有参有返
+int test04(int a)
+{
+    cout << "this is test04 a = " << a << endl;
+    return a;
+}
+
+int main(){
+
+    test01();
+    test02(4);
+    int num1 = test03();
+    cout << "num1 = " << num1 << endl;
+    test04(2);
+
+    system("pause");
+    return 0;
+}
+```
+
+## 6.6 函数的声明
+
+**作用**：告诉编译器函数名称及如何调用函数，函数的实际主体可以单独定义。
+
+- 函数的**声明可以多次**，但是函数的**定义只能有一次**
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+// 提前告诉编译器函数的存在，可以利用函数的声明
+// 声明
+int max(int a, int b);
+
+int main(){
+
+    int a = 10;
+    int b = 20;
+
+    cout << max(a, b) << endl;
+
+    system("pause");
+    return 0;
+}
+
+// 定义
+int max(int a, int b)
+{
+    return a > b ? a : b;
+}
+```
+
+## 6.7 函数的分文件编写
+
+**作用**：让代码结构更加清晰
+
+函数分文件编写一般有 4 个步骤：
+
+1. 创建后缀名为 `.h` 的头文件
+2. 创建后缀名为 `.cpp` 的源文件
+3. 在头文件中写函数声明
+4. 在源文件中写函数的定义
+
+示例：
+
+> `swap.h` 头文件
+
+```
+// 函数声明
+void swap(int a, int b);
+```
+
+> `swap.cpp` 源文件
+
+```
+#include <iostream>
+#include "swap.h"
+using namespace std;
+
+
+// 函数定义
+void swap(int a, int b)
+{
+    int temp = a;
+    a = b;
+    b = temp;
+    cout << "a = " << a << endl;
+    cout << "b = " << b << endl;
+}
+```
+
+> `main.cpp` 主文件
+```
+#include <iostream>
+#include "swap.h"
+using namespace std;
+
+int main(){
+
+    int a = 10;
+    int b = 20;
+    swap(a, b);
+
+    system("pause");
+
+    return 0;
+
+}
+```
+
+# 7 指针
+
+## 7.1 指针的基本概念
+
+**指针的作用**：可以通过指针间接访问内存
+
+- 内存编号是从 0 开始记录的，一般用十六进制数字表示
+- 可以利用指针变量保存地址
+
+## 7.2 指针变量的定义和使用
+
+**指针定义的语法**：`数据类型 * 指针变量名`
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    // 1. 定义指针
+    int a = 10;
+    int * p;
+    // 让指针记录变量 a 的地址
+    p = &a;
+    cout << "a 的地址为：" << &a << endl;
+    cout << "指针 p 为：" << p << endl;
+
+    // 2. 使用指针
+    // 可以通过解引用的方式来找到指针指向的内存
+    // 指针前加 * 代表解引用，找到指针指向的内存中的数据
+    *p = 1000;
+    cout << "a = " << a << endl;
+    cout << "*p 为：" << *p << endl;
+
+
+    system("pause");
+
+    return 0;
+}
+```
+
+## 7.3 指针所占内存空间
+
+提问：指针也是数据类型，那么这种数据类型占用多少内存空间？
+
+- 在 32 位系统 上，指针大小通常是 4 字节。
+- 在 64 位系统 上，指针大小通常是 8 字节。
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    int a = 10;
+    int * p = &a;
+    
+    cout << *p << endl;
+    cout << sizeof(p) << endl;
+    cout << sizeof(int *) << endl;
+    cout << sizeof(char *) << endl;
+    cout << sizeof(float *) << endl;
+    cout << sizeof(double *) << endl;
+
+    system("pause");
+
+    return 0;
+}
+```
+
+## 7.4 空指针和野指针
+
+1. **空指针**：指针变量内存中编号为 0 的空间
+
+2. **野指针**：指针变量指向非法的内存空间，程序中尽量避免出现野指针
+
+3. **用途**：初始化指针变量
+
+4. **注意**：空指针指向的内存是不可以访问的，内存编号 0 ~ 255 为系统占用内存，不允许用户访问
+
+示例 1 ：空指针
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    int * p = NULL;
+
+    // *p = 100; // 不可以访问
+    
+    cout << *p << endl;
+
+    system("pause");
+
+    return 0;
+}
+```
+
+
+示例 2 ：野指针
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    int * p = (int *)0x1100;
+    
+    cout << *p << endl;
+
+    system("pause");
+
+    return 0;
+}
+```
+
+## 7.5 const 修饰指针
+
+const 修饰指针有三种情况：
+
+1. const 修饰指针   --- 常量指针：指针的指向可以改，但是指针指向的值不可以改
+
+```
+int a = 10;
+int b = 20;
+
+const int * p = &a;
+
+// *p = 20; // 错误，不可以改指针指向的值
+p = &b;  // 正确，可以改指针指向
+```
+
+2. const 修饰常量   --- 指针常量：指针的指向不可以改，指针指向的值可以改
+
+```
+int a = 10;
+int b = 20;
+
+int * const p = &a;
+
+*p = 20; // 正确，可以改指针指向的值
+// p = &b;  // 错误，不可以改指针指向
+```
+
+
+3. const 既修饰指针，又修饰常量：指针的指向和指针指向的值都不可以改
+
+```
+int a = 10;
+int b = 20;
+
+const int * const p = &a;
+
+// *p = 20; // 错误，不可以改指针指向的值
+// p = &b;  // 错误，不可以改指针指向
+```
+
+## 7.6 指针和数组
+
+**作用**：利用指针访问数组中元素
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+int main(){
+
+    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+    int * p = arr; // 指向数组的指针
+
+    cout << "第一个元素：" << arr[0] << endl;
+    cout << "指针访问第一个元素：" << *p << endl;
+    
+    for (int i = 0; i < 10; i++)
+    {
+        // 利用指针遍历数组
+        cout << *p << endl;
+        p++; // 指针自增，根据指针类型大小增加
+    }
+
+    system("pause");
+
+    return 0;
+}
+```
+
+## 7.7 指针和函数
+
+**作用**：利用指针作函数参数，可以修改实参的值 (地址传递)
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+void swap01(int a, int b)
+{
+    int temp = a;
+    a = b;
+    b = temp;
+    cout << "swap01 a = " << a << endl;
+    cout << "swap01 b = " << b << endl;
+}
+
+void swap02(int *p1, int *p2)
+{
+    int temp = *p1;
+    *p1 = *p2;
+    *p2 = temp;
+    cout << "swap02 *p1 = " << *p1 << endl;
+    cout << "swap02 *p2 = " << *p2 << endl;
+
+}
+
+
+int main(){
+
+    // 1. 值传递
+    int a = 10;
+    int b = 20;
+    // swap01(a, b);
+    
+    // 2. 地址传递
+    // 如果是地址传递，则可以修改实参
+    swap02(&a, &b);
+
+    cout << "a = " << a << endl;
+    cout << "b = " << b << endl;
+
+    system("pause");
+
+    return 0;
+
+}
+```
+
+## 7.8 指针、数组、函数
+
+**案例描述**：封装一个函数，利用冒泡排序，实现对整型数组的升序排序
+
+**数组传参时会退化成指针，所以看起来是 “值传递”，其实是 “地址传递”，会直接修改原数组**
+
+例如数组：int arr[10] = {2, 9, 7, 10, 4, 5, 6, 3, 8, 1}
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+
+void bubbleSort(int * arr, int len) // int * arr 也可以写成 int arr[]，
+{
+    for (int i = 0; i < len - 1; i++)
+    {
+        for (int j = 0; j < len - 1 - i; j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void printArray(int * arr, int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        cout << arr[i] << endl;
+    }
+}
+
+int main(){
+
+    int arr[10] = {2, 9, 7, 10, 4, 5, 6, 3, 8, 1};
+
+    int len = sizeof(arr) / sizeof(arr[0]);
+
+    bubbleSort(arr, len);
+
+    printArray(arr, len);
+
+    system("pause");
+
+    return 0;
+
+}
+```
+
+# 8 结构体
+
+## 8.1 结构体基本概念
+
+结构体属于用户**自定义的数据类型**，允许用户存储不同的数据类型
+
+## 8.2 结构体定义和使用
+
+**语法**：`struct 结构体名 {结构体成员列表}`
+
+通过结构体创建变量的方式有三种：
+
+- struct 结构体 变量名;
+- struct 结构体 变量名 = {成员1值, 成员2值...};
+- 定义结构体时顺便创建变量
+
+示例：
+
+```
+#include <iostream>
+using namespace std;
+#include <string>
+
+// 创建学生数据类型，学生包括 (姓名、年龄、分数)
+// 自定义数据类型，一些类型集合组成一个类型
+
+struct Student
+{
+    string name;
+    int age;
+    int score;
+}s3; // 顺便创建结构体变量
+
+// 通过学生类型创建具体学生
+
+int main(){
+
+    // 1. struct Student s1
+    struct Student s1;
+    // 给 s1 属性赋值，通过 . 访问结构体变量中的属性
+    s1.name = "张三";
+    s1.age = 18;
+    s1.score = 100;
+
+    cout << "姓名：" << s1.name << " 年龄：" << s1.age << " 分数：" << s1.score << endl;
+
+    // 2. struct Student s2 = {...}
+    struct Student s2 = {"李四", 19, 80};
+
+    cout << "姓名：" << s2.name << " 年龄：" << s2.age << " 分数：" << s2.score << endl;
+
+    // 3. 定义结构体时顺便创建变量
+    s3.name = "王五";
+    s3.age = 20;
+    s3.score = 70;
+
+    cout << "姓名：" << s3.name << " 年龄：" << s3.age << " 分数：" << s3.score << endl;
+    
+
+    system("pause");
+
+    return 0;
+
+}
+```
+
+## 8.3 结构体数组
+
+1. **作用**：将自定义的结构体放入到数组中方便维护
+
+2. **语法**：`struct 结构体 数组名[元素个数] = { {}, {}, ... {} };`
+
+示例：
+
+```
+
+```
