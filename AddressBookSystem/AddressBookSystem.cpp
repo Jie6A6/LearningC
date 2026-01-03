@@ -26,6 +26,21 @@ struct Addressbooks
 };
 
 
+// 菜单界面
+void showMenu()
+{
+    cout << "****************************" << endl;
+    cout << "*****   1. 添加联系人   *****" << endl;
+    cout << "*****   2. 显示联系人   *****" << endl;
+    cout << "*****   3. 删除联系人   *****" << endl;
+    cout << "*****   4. 查找联系人   *****" << endl;
+    cout << "*****   5. 修改联系人   *****" << endl;
+    cout << "*****   6. 清空联系人   *****" << endl;
+    cout << "*****   0. 退出通讯录   *****" << endl;
+    cout << "****************************" << endl;
+}
+
+
 // 1. 添加联系人
 void addPerson(Addressbooks * abs)
 {
@@ -93,6 +108,7 @@ void addPerson(Addressbooks * abs)
     
 }
 
+
 // 2. 显示所有联系人
 void showPerson(Addressbooks * abs)
 {
@@ -115,6 +131,7 @@ void showPerson(Addressbooks * abs)
     system("pause");
     system("cls");
 }
+
 
 // 3. 删除指定联系人
 
@@ -165,21 +182,32 @@ void deletePerson(Addressbooks * abs)
     
 }
 
-// 菜单界面
-void showMenu()
+
+// 4. 查找指定联系人
+void findPerson(Addressbooks * abs)
 {
-    cout << "****************************" << endl;
-    cout << "*****   1. 添加联系人   *****" << endl;
-    cout << "*****   2. 显示联系人   *****" << endl;
-    cout << "*****   3. 删除联系人   *****" << endl;
-    cout << "*****   4. 查找联系人   *****" << endl;
-    cout << "*****   5. 修改联系人   *****" << endl;
-    cout << "*****   6. 清空联系人   *****" << endl;
-    cout << "*****   0. 退出通讯录   *****" << endl;
-    cout << "****************************" << endl;
+    cout << "请输入您要查找的联系人" << endl;
+    string name;
+    cin >> name;
+    
+    // 判断联系人是否存在
+    int ret = isExist(abs, name);
+    if (ret != -1) // 找到联系人
+    {
+        cout << "姓名：" << abs->personArray[ret].m_Name << "\t"; // 制表符操作
+        cout << "性别：" << (abs->personArray[ret].m_Gender == 1 ? "男" : "女") << "\t";
+        cout << "年龄：" << abs->personArray[ret].m_Age<< "\t";
+        cout << "电话：" << abs->personArray[ret].m_Phone << "\t";
+        cout << "住址：" << abs->personArray[ret].m_Addr << endl;
+    }
+    else
+    {
+        cout << "查无此人！" << endl; 
+    }
+
+    system("pause");
+    system("cls");
 }
-
-
 
 int main()
 {
