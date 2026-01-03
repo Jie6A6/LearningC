@@ -209,6 +209,75 @@ void findPerson(Addressbooks * abs)
     system("cls");
 }
 
+
+// 5. 修改指定联系人
+void modifyPerson(Addressbooks * abs)
+{
+    cout << "请输入您要修改的联系人" << endl;
+    string name;
+    cin >> name;
+    
+    // 判断联系人是否存在
+    int ret = isExist(abs, name);
+    if (ret != -1) // 修改联系人
+    {
+        // 姓名
+        string name;
+        cout << "请输入姓名：" << endl;
+        cin >> name;
+        abs->personArray[ret].m_Name = name;
+        // 性别
+        cout << "请输入性别：" << endl;
+        cout << "1 --- 男" << endl;
+        cout << "2 --- 女" << endl;
+        int gender = 0;
+
+        while (true)
+        {
+            cin >> gender;
+            if (gender == 1 || gender == 2)
+            {
+                abs->personArray[ret].m_Gender = gender;
+                break;
+            }
+            cout << "输入有误，请重新输入！" << endl;
+        }
+        // 年龄
+        cout << "请输入年龄：" << endl;
+        int age = 0;
+        abs->personArray[ret].m_Age = age;
+        // 电话
+        cout << "请输入电话：" << endl;
+        string phone;
+        abs->personArray[ret].m_Phone = phone;
+        // 地址
+        cout << "请输入地址：" << endl;
+        string adress;
+        abs->personArray[ret].m_Addr = adress;
+
+        cout << "修改成功！" << endl; 
+    }
+    else
+    {
+        cout << "查无此人！" << endl; 
+    }
+
+    system("pause");
+    system("cls");
+}
+
+
+// 6. 清空联系人
+void cleanPerson(Addressbooks * abs)
+{
+
+    abs->m_Size = 0; //将当前记录联系人数量置为 0 ，做逻辑清空操作
+    cout << "通讯录清空" << endl;
+    system("pause");
+    system("cls");
+}
+
+
 int main()
 {
 
@@ -251,13 +320,13 @@ int main()
             deletePerson(&abs);
             break;
         case 4: // 4. 查找联系人
-            /* code */
+            findPerson(&abs);
             break;
         case 5: // 5. 修改联系人
-            /* code */
+            modifyPerson(&abs);
             break;
         case 6: // 6. 清除联系人
-            /* code */
+            cleanPerson(&abs);
             break;
         case 0: // 0. 退出通讯录
             cout << "欢迎下次使用" << endl;
