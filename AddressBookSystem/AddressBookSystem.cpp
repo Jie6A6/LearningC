@@ -116,7 +116,54 @@ void showPerson(Addressbooks * abs)
     system("cls");
 }
 
+// 3. 删除指定联系人
 
+// 检测联系人是否存在
+int isExist(Addressbooks * abs, string name) // 参数 1 通讯录，参数 2 输入的人名
+{
+    for (int i = 0; i < abs->m_Size; i++)
+    {
+        // 找到用户输入的姓名
+        if (abs->personArray[i].m_Name == name)
+        {
+            return i; // 找到了，返回这个人在数组的下标编号
+        }
+    }
+    return -1; // 遍历结束没有找到，返回 -1
+}
+
+// 删除指定联系人
+void deletePerson(Addressbooks * abs)
+{
+    cout << "请输入您要删除的联系人：" << endl;
+
+    string name;
+    cin >> name;
+
+    // ret == -1 未查到
+    // ret != -1 查到
+    int ret = isExist(abs, name);
+
+    if (ret != -1)
+    {
+        // 查到了，进行具体删除操作，把后面的数据往需要删除的前移数据覆盖，并且让通讯录中记录人员数量 -1
+        for (int i = ret; i < abs->m_Size; i++)
+        {
+            // 数据前移
+            abs->personArray[i] = abs->personArray[i + 1];
+        }
+        abs->m_Size--; // 更新通讯录中的人员数
+        cout << "删除成功！" << endl;
+    }
+    else
+    {
+        cout << "查无此人！" << endl;
+    }
+
+    system("pause");
+    system("cls");
+    
+}
 
 // 菜单界面
 void showMenu()
@@ -159,8 +206,21 @@ int main()
         case 2: // 2. 显示联系人
             showPerson(&abs);
             break;
-        case 3: // 3. 删除联系人
-            /* code */
+        case 3: // 3. 删除联系人 // case语句中大段代码要括号括起来
+        /*{    cout << "请输入删除联系人的姓名：" << endl;
+            string name;
+            cin >> name;
+            
+            if (isExist(&abs, name) == -1)
+            {
+                cout << "查无此人！" << endl;
+            }
+            else
+            {
+                cout << "找到此人！" << endl;
+            }
+        }*/
+            deletePerson(&abs);
             break;
         case 4: // 4. 查找联系人
             /* code */
