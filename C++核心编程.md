@@ -440,13 +440,67 @@ int main(){
 #include<iostream>
 using namespace std;
 
-void func()
-
+// 发现是引用，转换为 int* const ref = &a
+void func(int& ref)
+{
+    ref = 10; // ref 是引用，转化为 *ref = 100
+}
 
 int main(){
 
+    int a = 10;
+
+    // 编译器在内部会把引用转换成指针常量 int* const ref = &a; 指针常量是指针指向不可改，也说明为什么引用不可更改
+
+    int& ref = a;
+    ref = 20; // 内部发现 ref 是引用，自动帮我们转换为：*ref = 20;
+
+    cout << "a:" << a << endl;
+    cout << "ref:" << ref << endl;
+
+    func(a);
+
+    return 0;
+
+}
+```
+
+### 2.6 常量引用
+
+**作用**：常量引用主要用来修饰形参，防止误操作
+
+在函数形参列表中，可以加 **const 修饰形参**，防止形参改变实参
+
+示例：
+
+```
+#include<iostream>
+using namespace std;
+
+// 引用使用场景，通常用来修饰形参
+void showValue(const int & v)
+{
+    // v = 10;
+    cout << "v = " << v << endl;
+}
+
+int main(){
+
+    // int& ref = 10; 引用本身需要一个合法的内存空间，因此执行错误
+
+    // 加入 const 就可以了，编译器优化代码，int temp = 10; const int& ref = temp;
+
+    // const int & ref = 10; // 引用本身需要一个合法的内存空间
+
+    // ref = 20; // 加入 const 之后变成只读，不可以修改
 
 
+    int a = 100;
+    showValue(a);
+
+
+    cout << "a = " << a << endl;
+    
 
     system("pause");
 
@@ -454,3 +508,147 @@ int main(){
 
 }
 ```
+
+## 3. 函数提高
+
+### 3.1 函数默认参数
+
+在 C++ 中，函数的形参列表中的形参是可以有默认值的。
+
+1. **语法**：`返回值类型 函数名 (参数 = 默认值) {}`
+
+2. **注意**：
+
+- 如果某个位置参数有默认值，那么这个位置往后必须都有默认值
+- 函数声明和函数实现只能有一个有默认值
+
+示例：
+
+```
+#include<iostream>
+using namespace std;
+
+// 如果某个位置参数有默认值，那么这个位置往后必须都有默认值
+int func(int a, int b = 10, int c = 10)
+{
+    return a + b + c;
+}
+
+
+// 如果函数声明有默认值，函数实现的时候不能有默认值
+// 声明和实现只能有一个有
+int func2(int a = 10, int b = 10);
+
+
+int func2(int a, int b)
+{
+    return a + b;
+}
+
+int main(){
+
+    cout << func(10) << endl;
+    
+    cout << func(10, 20) << endl;
+
+    cout << func(10, 20, 30) << endl;
+    
+    cout << func2(10, 20) << endl;
+
+    system("pause");
+
+    return 0;
+
+}
+```
+
+### 3.2 函数占位参数
+
+C++ 中函数的形参列表里可以有占位参数，用来做占位，调用函数时必须填补改位置
+
+**语法**：`返回值类型 函数名 (数据类型){}`
+
+示例：
+
+```
+#include<iostream>
+using namespace std;
+
+int func(int a, int)
+{
+    cout << "This is a func" << endl;
+}
+
+
+int main(){
+
+    func(10, 10); // 占位参数必须补齐
+
+    system("pause");
+
+    return 0;
+
+}
+```
+
+### 3.3 函数重载
+
+#### 3.3.1 函数重载概述
+
+1. **作用**：函数名可以相同，提高复用性
+
+2. **函数重载满足条件**：
+
+- 同一个作用域下
+- 函数名称相同
+- 函数参数**类型不同**或者**个数不同**或者**顺序不同**
+
+3. **注意**：函数的返回值不可以作为函数重载的条件
+
+示例：
+
+```
+#include<iostream>
+using namespace std;
+
+void func()
+{
+    cout << "func 的调用" << endl;
+}
+
+void func(int a)
+{
+    cout << "func(int a) 的调用" << endl;
+}
+
+void func(double a)
+{
+    cout << "func(double a) 的调用" << endl;
+}
+
+void func(int a, double b)
+{
+    cout << "func(int a, double b) 的调用" << endl;
+}
+
+void func(double b, int a)
+{
+    cout << "func(double b, int a) 的调用" << endl;
+}
+
+int main(){
+
+    func();
+    func(10);
+    func(3.14);
+    func(10,3.14);
+    func(3.14,10);
+
+    system("pause");
+
+    return 0;
+
+}
+```
+
+#### 3.3.2
